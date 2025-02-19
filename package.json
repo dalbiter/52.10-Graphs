@@ -1,0 +1,19 @@
+{
+  "name": "graphs",
+  "version": "1.0.0",
+  "description": "graphs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dalbiter/52.10-Graphs.git"
+  },
+  "author": "dan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dalbiter/52.10-Graphs/issues"
+  },
+  "homepage": "https://github.com/dalbiter/52.10-Graphs#readme"
+}
