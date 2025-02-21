@@ -53,6 +53,7 @@ class FriendGraph {
         let toVisitStack = [person1];
         let seen = new Set(toVisitStack)
         while(toVisitStack.length) {
+            console.log(toVisitStack.map(node => node.name))
             let currPerson = toVisitStack.pop();
             console.log("DFS VISITING:", currPerson.name);
 
@@ -66,6 +67,18 @@ class FriendGraph {
             }
         }
         return false   
+    }
+    areConnectedDFSRecursive(person1, person2, seen=new Set([person1])) {
+        if(person1 === person2) return true;
+        for(let neighbor of person1.adjacent) {
+            if(!seen.has(neighbor)) {
+                seen.add(neighbor);
+                if(this.areConnectedDFSRecursive(neighbor, person2, seen)) {
+                    return true;
+                }
+            }
+        }
+        return false    
     }
 }
 
