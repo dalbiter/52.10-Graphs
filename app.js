@@ -7,7 +7,7 @@ class PersonNode {
 
 // const homer = new PersonNode('homer simpson');
 // const marge = new PersonNode('marge simpson');
-// const maggie = new PersonNode('maggie simpson')
+// const maggie = new PersonNode('maggie simpson');
 // homer.adjacent.add(marge);
 // marge.adjacent.add(homer);
 // maggie.adjacent.add(homer);
@@ -31,6 +31,63 @@ class FriendGraph {
         person1.adjacent.add(person2);
         person2.adjacent.add(person1);
     }
+    areConnectedBFS(person1, person2) {
+        let toVisitQueue = [person1];
+        let seen = new Set(toVisitQueue)
+        while(toVisitQueue.length) {
+            let currPerson = toVisitQueue.shift();
+            console.log("BFS VISITING:", currPerson.name);
+
+            if (currPerson === person2) return true;
+
+            for(let neighbor of currPerson.adjacent) {
+                if(!seen.has(neighbor)) {
+                    toVisitQueue.push(neighbor);
+                    seen.add(neighbor);
+                }
+            }
+        }
+        return false   
+    }
+    areConnectedDFS(person1, person2) {
+        let toVisitStack = [person1];
+        let seen = new Set(toVisitStack)
+        while(toVisitStack.length) {
+            let currPerson = toVisitStack.pop();
+            console.log("DFS VISITING:", currPerson.name);
+
+            if (currPerson === person2) return true;
+
+            for(let neighbor of currPerson.adjacent) {
+                if(!seen.has(neighbor)) {
+                    toVisitStack.push(neighbor);
+                    seen.add(neighbor);
+                }
+            }
+        }
+        return false   
+    }
 }
 
+const homer = new PersonNode('homer simpson');
+const marge = new PersonNode('marge simpson');
+const maggie = new PersonNode('maggie simpson');
+const lisa = new PersonNode('lisa simpson');
+const grampa = new PersonNode('grampa simpson');
+
+const friends = new FriendGraph();
+friends.addPeople([homer, marge, maggie, lisa, grampa]);
+friends.setFriends(homer, marge);
+friends.setFriends(homer, lisa);
+friends.setFriends(homer, maggie);
+friends.setFriends(marge, maggie);
+friends.setFriends(lisa, maggie);
+friends.setFriends(lisa, grampa);
+
+const moe = new PersonNode('moe');
+const barney = new PersonNode('barney');
+const lenny = new PersonNode('lenny');
+friends.addPeople([moe, barney, lenny]);
+friends.setFriends(moe, barney);
+friends.setFriends(lenny, barney);
 
